@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\25163461\Documents\Insta4DS-main\build\windows\x64\CMakeFiles\8a2fe455a56852bd1445237fe5f5bd81\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{CC122E00-3AA4-3A6C-9129-50D60499AFE2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

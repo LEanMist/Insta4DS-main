@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/25163461/Documents/Insta4DS-main/build/windows/x64/cmake_install.cmake",
+		"C:/Users/25163461/Documents/Insta4DS-main/build/windows/x64/flutter/cmake_install.cmake",
+		"C:/Users/25163461/Documents/Insta4DS-main/build/windows/x64/runner/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
