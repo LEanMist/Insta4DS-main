@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/theme/app_theme.dart';
 
 class BuscarPage extends StatefulWidget {
   const BuscarPage({super.key});
@@ -41,9 +42,9 @@ class _BuscarPageState extends State<BuscarPage> {
               },
               decoration: InputDecoration(
                 hintText: 'Pesquisar',
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: Icon(Icons.search, color: AppColors.purple),
                 filled: true,
-                fillColor: Colors.grey.shade200,
+                fillColor: AppColors.white,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -62,25 +63,28 @@ class _BuscarPageState extends State<BuscarPage> {
 
                 itemBuilder: (context, indice) {
                   final cores = [
-                    Colors.pink,
-                    Colors.deepPurple,
-                    Colors.blue,
-                    Colors.orange,
-                    Colors.teal,
+                    AppColors.purple,
+                    AppColors.coral,
+                    AppColors.blue,
+                    AppColors.purpleDark,
+                    AppColors.navy,
                   ];
 
                   return Container(
-                    color: cores[indice % cores.length],
+                    decoration: BoxDecoration(
+                      color: cores[indice % cores.length],
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.code, color: Colors.white, size: 38),
+                        const Icon(Icons.code, color: AppColors.white, size: 38),
                         const SizedBox(height: 8),
                         Text(
                           resultado[indice],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

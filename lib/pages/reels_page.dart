@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_flutter/widgets/botao_Reel.dart';
+import 'package:instagram_flutter/theme/app_theme.dart';
+import 'package:instagram_flutter/widgets/botao_reel.dart';
 import '../utils/mensagem_util.dart';
 
 class ReelsPage  extends StatelessWidget{
@@ -14,24 +15,24 @@ class ReelsPage  extends StatelessWidget{
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.deepPurple, Colors.black],
+                colors: [AppColors.purpleDark, AppColors.navy],
                 begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,              
-              )
+                end: Alignment.bottomCenter,
+              ),
             ),
-            child: const Icon(Icons.play_circle, color: Colors.white54, size: 120,),
+            child: const Icon(Icons.play_circle, color: AppColors.white, size: 120),
           ),
           const Positioned(
             top: 16,
             left: 16,
-            child : Text(
+            child: Text(
               'Reels',
               style: TextStyle(
-                color: Colors.white, 
-                fontSize: 26, 
-                fontWeight: FontWeight.bold
+                color: AppColors.white,
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
               ),
-            )
+            ),
           ),
           const Positioned(
             left: 16,
@@ -41,17 +42,16 @@ class ReelsPage  extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '@flutter.dev', 
+                  '@flutter.dev',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8,),
-                Text(
-                  'Aprendendo Flutter de uma forma simples e prática', 
-                  style: TextStyle(
-                    color: Colors.white
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
                   ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Aprendendo Flutter de uma forma simples e prática',
+                  style: TextStyle(color: AppColors.white),
                 )
               ],
             )

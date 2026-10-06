@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/pages/home_page.dart';
 import 'package:instagram_flutter/pages/recuperacao_senha_page.dart';
+import 'package:instagram_flutter/theme/app_theme.dart';
 import 'package:instagram_flutter/utils/mensagem_util.dart';
 import 'package:instagram_flutter/utils/usuario_store.dart';
 import 'cadastro_page.dart';
@@ -75,107 +76,102 @@ class _LoginPageState extends State<LoginPage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-              'InstaAula',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(24, 28, 24, 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 16),
+              Container(
+                width: 96,
+                height: 96,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: const LinearGradient(
+                    colors: [AppColors.coral, AppColors.purple],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.purple.withValues(alpha: 0.28),
+                      blurRadius: 24,
+                      offset: const Offset(0, 12),
+                    ),
+                  ],
+                ),
+                child: const Icon(Icons.flutter_dash, size: 64, color: AppColors.white),
               ),
-            ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 40,),
 
-            const Icon(
-              Icons.flutter_dash,
-              size: 100,
-            ),
+              const SizedBox(height: 24),
 
-            const SizedBox(height: 20,),
-
-            Text(
-              'Bem vindo', 
-              textAlign: TextAlign.center, 
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-
-            const SizedBox(height: 30,),
-
-            TextField(
-              controller: usuarioController,
-              decoration: const InputDecoration(
-                hintText: 'Entre com o seu usuário',
-                labelText: 'Usuário',
-                prefixIcon: Icon(Icons.alternate_email),
-                border: OutlineInputBorder(),
-              ),
-            ),
- 
-            const SizedBox(height: 15,),
-
-            TextField(
-              controller: senhaController,
-              obscureText: esconderSenha,
-              decoration: InputDecoration(
-                hintText: 'Entre com a sua senha',
-                labelText: 'Senha',
-                prefixIcon: const Icon(Icons.lock),
-                border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  onPressed: (){
-                    setState(() {
-                      esconderSenha = !esconderSenha;
-                    });
-                  }, 
-                  icon: Icon(
-                    esconderSenha ? Icons.visibility : Icons.visibility_off
-                  )
+              Text(
+                'Bem vindo!',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  fontSize: 30,
+                  letterSpacing: -1,
                 ),
               ),
-            ),
-
-            const SizedBox(height: 17,),
-
-            ElevatedButton.icon(
-              onPressed: () async {
-                if (await entrar()) abrirHome();
-              },
-              icon: const Icon(Icons.login),
-              label: const Text('Entrar'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 138, 186, 231),
-                foregroundColor: Colors.black
+              const SizedBox(height: 8),
+              Text(
+                'Entre para continuar sua jornada.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            ),
 
-            const SizedBox(height: 7,),
-
-            ElevatedButton.icon(
-              onPressed: abriCadastro,
-              icon: const Icon(Icons.person_add_alt_1),
-              label: const Text('Cadastrar'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 138, 186, 231),
-                foregroundColor: Colors.black
+              const SizedBox(height: 32),
+              TextField(
+                controller: usuarioController,
+                decoration: const InputDecoration(
+                  hintText: 'Entre com o seu usuário',
+                  labelText: 'Usuário',
+                  prefixIcon: Icon(Icons.alternate_email),
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: abrirRecuperacaoSenha,
-              child: const Text('Esqueci minha senha'),
-            ),
-          ],
+              const SizedBox(height: 15),
+              TextField(
+                controller: senhaController,
+                obscureText: esconderSenha,
+                decoration: InputDecoration(
+                  hintText: 'Entre com a sua senha',
+                  labelText: 'Senha',
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        esconderSenha = !esconderSenha;
+                      });
+                    },
+                    icon: Icon(
+                      esconderSenha ? Icons.visibility : Icons.visibility_off,
+                      color: AppColors.muted,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+              ElevatedButton.icon(
+                onPressed: () async {
+                  if (await entrar()) abrirHome();
+                },
+                icon: const Icon(Icons.login),
+                label: const Text('Entrar'),
+              ),
+
+              const SizedBox(height: 10),
+
+              OutlinedButton.icon(
+                onPressed: abriCadastro,
+                icon: const Icon(Icons.person_add_alt_1),
+                label: const Text('Cadastrar'),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: abrirRecuperacaoSenha,
+                child: const Text('Esqueci minha senha'),
+              ),
+            ],
+          ),
         ),
       ),
     );

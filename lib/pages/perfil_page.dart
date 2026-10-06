@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/pages/login_page.dart';
+import 'package:instagram_flutter/theme/app_theme.dart';
 import 'package:instagram_flutter/utils/usuario_store.dart';
 import 'editar_perfil_page.dart';
 
@@ -23,6 +24,7 @@ class _PerfilPageState extends State<PerfilPage> {
   }
   
   Future<void> abrirEditarPerfil(BuildContext context) async {
+    final messenger = ScaffoldMessenger.maybeOf(context);
     final atualizado = await Navigator.push<bool>(
       context,
       MaterialPageRoute(builder: (context) => const EditarPerfilPage()),
@@ -30,39 +32,46 @@ class _PerfilPageState extends State<PerfilPage> {
     if(!mounted || atualizado != true) return;
 
     setState(() {});
-    mostrarMensagem(context, 'Dados atualizados.');
+    messenger?.showSnackBar(
+      const SnackBar(content: Text('Dados atualizados.')),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final usuario = UsuarioStore.usuarioLogado;
+    final nome = usuario?.nome.trim() ?? '';
+    final inicial = nome.isEmpty ? null : nome.substring(0, 1).toUpperCase();
 
     return SafeArea(
       child: CustomScrollView(
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.white,
             title: Text(
               '@${usuario?.nomeUsuario ?? 'perfil'}',
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                color: AppColors.ink,
+                fontWeight: FontWeight.w800,
+              ),
             ),
             actions: [
               IconButton(
                 onPressed: () {
                   mostrarMensagem(context, 'Criar publicação');
                 },
-                icon: const Icon(Icons.add_box_outlined),
+                icon: Icon(Icons.add_box_outlined, color: AppColors.purple),
               ),
               IconButton(
                 onPressed: () {
                   mostrarMensagem(context, 'Abrir menu');
                 },
-                icon: const Icon(Icons.menu),
+                icon: Icon(Icons.menu, color: AppColors.coral),
               ),
               IconButton(
                 onPressed: () => sair(context),
-                icon: const Icon(Icons.logout),
+                icon: Icon(Icons.logout, color: AppColors.purpleDark),
               ),
             ],
           ),
@@ -76,17 +85,17 @@ class _PerfilPageState extends State<PerfilPage> {
                     children: [
                       CircleAvatar(
                         radius: 42,
-                        backgroundColor: Colors.deepPurple,
-                        child: usuario != null && usuario.nome.trim().isNotEmpty
+                        backgroundColor: AppColors.purple,
+                        child: inicial != null
                             ? Text(
-                                usuario.nome.trim()[0].toUpperCase(),
+                                inicial,
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                   fontSize: 36,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w800,
                                 ),
                               )
-                            : const Icon(Icons.person, color: Colors.white, size: 48),
+                            : const Icon(Icons.person, color: AppColors.white, size: 48),
                       ),
                       SizedBox(width: 24),
                       Expanded(child: NumeroPerfil(numero: '9', rotulo: 'publicações')),
@@ -97,15 +106,25 @@ class _PerfilPageState extends State<PerfilPage> {
                   const SizedBox(height: 14),
                   Text(
                     usuario?.nome ?? 'Nome não disponível',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      color: AppColors.ink,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
-                  Text('E-mail: ${usuario?.email ?? 'não disponível'}'),
+                  const SizedBox(height: 3),
+                  Text(
+                    'E-mail: ${usuario?.email ?? 'não disponível'}',
+                    style: const TextStyle(color: AppColors.muted),
+                  ),
                   if(usuario?.biografia.isNotEmpty ?? false)
                     Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Text(usuario!.biografia),
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        usuario!.biografia,
+                        style: const TextStyle(color: AppColors.ink),
+                      ),
                     ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
@@ -121,12 +140,15 @@ class _PerfilPageState extends State<PerfilPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: Padding(padding: EdgeInsets.all(12), child: Icon(Icons.grid_on)),
+                  child: Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Icon(Icons.grid_on, color: AppColors.purple),
+                  ),
                 ),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.all(12),
-                    child: Icon(Icons.person_pin_outlined, color: Colors.grey),
+                    child: Icon(Icons.person_pin_outlined, color: AppColors.coral),
                   ),
                 ),
               ],
@@ -136,12 +158,19 @@ class _PerfilPageState extends State<PerfilPage> {
             delegate: SliverChildBuilderDelegate(
               (context, indice) {
                 final cores = [
-                  Colors.deepPurple, Colors.pink, Colors.blue, Colors.orange, Colors.teal,
+                  AppColors.purple,
+                  AppColors.coral,
+                  AppColors.blue,
+                  AppColors.purpleDark,
+                  AppColors.navy,
                 ];
 
                 return Container(
-                  color: cores[indice % cores.length],
-                  child: const Icon(Icons.flutter_dash, color: Colors.white, size: 42),
+                  decoration: BoxDecoration(
+                    color: cores[indice % cores.length],
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: const Icon(Icons.flutter_dash, color: AppColors.white, size: 42),
                 );
               },
               childCount: 9,

@@ -81,19 +81,36 @@ class _CadastroPage extends State<CadastroPage> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: const Text('Criar conta')),
+      appBar: AppBar(
+        title: const Text('Criar conta'),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back),
+        ),
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.fromLTRB(24, 28, 24, 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Text(
+              'Crie sua conta',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Cadastre-se para acessar o seu perfil.',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 28),
             TextField(
               controller: nomeController,
               textCapitalization: TextCapitalization.words,
               decoration: const InputDecoration(
                 labelText: 'Nome',
                 prefixIcon: Icon(Icons.person_outline),
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 15),
@@ -103,7 +120,6 @@ class _CadastroPage extends State<CadastroPage> {
               decoration: const InputDecoration(
                 labelText: 'E-mail',
                 prefixIcon: Icon(Icons.email_outlined),
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 15),
@@ -112,7 +128,6 @@ class _CadastroPage extends State<CadastroPage> {
               decoration: const InputDecoration(
                 labelText: 'Nome de usuário',
                 prefixIcon: Icon(Icons.alternate_email),
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 15),
@@ -144,12 +159,8 @@ class _CadastroPage extends State<CadastroPage> {
               onPressed: cadastrar,
               icon: const Icon(Icons.person_add_alt_1),
               label: const Text('Cadastrar'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 138, 186, 231),
-                foregroundColor: Colors.black,
-              ),
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 8),
             TextButton.icon(
               onPressed: login,
               icon: const Icon(Icons.arrow_back),

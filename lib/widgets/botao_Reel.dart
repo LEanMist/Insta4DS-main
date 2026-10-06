@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/theme/app_theme.dart';
 
 class BotaoReel extends StatelessWidget {
   final IconData icone;
@@ -21,12 +22,12 @@ class BotaoReel extends StatelessWidget {
         children: [
           IconButton(
             onPressed: aoTocar,
-            icon: Icon(icone, color: Colors.white, size: 30),
+            icon: Icon(icone, color: AppColors.white, size: 30),
           ),
           Text(
-          texto,
-          style: const TextStyle(color: Colors.white, fontSize: 12),
-        ),
+            texto,
+            style: const TextStyle(color: AppColors.white, fontSize: 12),
+          ),
       ],
     ));
   }

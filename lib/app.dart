@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';
+import 'theme/app_theme.dart';
 
 class InstagramApp extends StatelessWidget {
     const InstagramApp({super.key});
@@ -9,12 +10,7 @@ class InstagramApp extends StatelessWidget {
       return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'InstaAula',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.pink,
-              brightness:  Brightness.light
-            )
-          ),
+          theme: AppTheme.light(),
           home: const LoginPage(),
       );
     } 
